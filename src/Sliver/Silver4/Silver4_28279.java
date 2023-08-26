@@ -1,4 +1,4 @@
-package Sliver;
+package Sliver.Silver4;
 
 import java.io.BufferedReader;
 import java.io.IOException;
