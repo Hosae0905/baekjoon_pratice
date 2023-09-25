@@ -8,14 +8,14 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class Silver3_12789_스택 {
+public class Silver3_12789_스택_O {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Stack<Integer> standbyLine = new Stack<>();
-        Queue<Integer> currentLine = new LinkedList<>();
+        Stack<Integer> standbyLine = new Stack<>();         // 대기 줄
+        Queue<Integer> currentLine = new LinkedList<>();    // 현재 줄
 
         for (int i = 0; i < N; i++) {
             currentLine.add(Integer.parseInt(st.nextToken()));

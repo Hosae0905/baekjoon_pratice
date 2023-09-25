@@ -7,8 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.StringTokenizer;
 
-public class Silver3_2346_덱 {
-    static StringBuilder sb = new StringBuilder();
+public class Silver3_2346_덱_O {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());

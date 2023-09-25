@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Silver4_2164_큐 {
+public class Silver4_2164_큐_O {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Queue<Integer> queue = new LinkedList<>();
