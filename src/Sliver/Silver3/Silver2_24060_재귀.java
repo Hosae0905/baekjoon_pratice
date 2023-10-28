@@ -3,6 +3,10 @@ package Sliver.Silver3;
 import java.io.*;
 import java.util.*;
 
+/**
+ * https://bono039.tistory.com/285
+ */
+
 public class Silver2_24060_재귀 {
 
     static int[] A, tmp;
@@ -46,13 +50,10 @@ public class Silver2_24060_재귀 {
 
         while (i <= q && j <= r) {
             if (arr[i] <= arr[j]) {
-                tmp[t] = arr[i];
-                i++;
+                tmp[t++] = arr[i++];
             } else {
-                tmp[t] = arr[j];
-                j++;
+                tmp[t++] = arr[j++];
             }
-            t++;
         }
 
         while (i <= q) {
