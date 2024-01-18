@@ -2,16 +2,22 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] array, int[][] commands) {
-        int[] answer = new int[commands.length];
+        int[] result = new int[commands.length];
+        List<Integer> temp = new ArrayList<>();
+        List<Integer> branch = new ArrayList<>();
 
         for (int i = 0; i < commands.length; i++) {
-            int[] temp = new int[commands[i][1] - (commands[i][0] - 1)];
-            for (int j = 0; j < temp.length; j++) {
-                temp[j] = array[j + (commands[i][0] - 1)];
+            for (int j = commands[i][0] - 1; j <= commands[i][1] - 1; j++) {
+                temp.add(array[j]);
             }
-            Arrays.sort(temp);
-            answer[i] = temp[commands[i][2] - 1];
+            Collections.sort(temp);
+            branch.add(temp.get(commands[i][2] - 1));
+            temp.clear();
         }
-        return answer;
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = branch.get(i);
+        }
+        return result;
     }
 }
