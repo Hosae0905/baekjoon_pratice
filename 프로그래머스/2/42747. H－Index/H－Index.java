@@ -20,6 +20,7 @@ class Solution {
                 answer++;
             }
         }
+        
         return answer;
     }
 }
