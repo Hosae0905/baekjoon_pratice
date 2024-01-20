@@ -3,24 +3,24 @@ import java.util.*;
 class Solution {
     public int solution(int[] citations) {
         int answer = 0;
+        Integer[] test = new Integer[citations.length];
 
-        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < citations.length; i++) {
-            list.add(citations[i]);
+            test[i] = citations[i];
         }
 
-        list.sort(Collections.reverseOrder());
+        Arrays.sort(test, Collections.reverseOrder());
 
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(0) == 0) {
-                return 0;
-            } else if (list.get(i) <= i) {
+        if (test[0] == 0) return 0;
+
+        for (int i = 0; i < test.length; i++) {
+            if (test[i] <= i) {
                 break;
             } else {
                 answer++;
             }
         }
-        
+
         return answer;
     }
 }
