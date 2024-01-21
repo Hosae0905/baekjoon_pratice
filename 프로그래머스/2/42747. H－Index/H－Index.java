@@ -3,18 +3,17 @@ import java.util.*;
 class Solution {
     public int solution(int[] citations) {
         int answer = 0;
-        Integer[] test = new Integer[citations.length];
+        ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < citations.length; i++) {
-            test[i] = citations[i];
+            list.add(citations[i]);
         }
 
-        Arrays.sort(test, Collections.reverseOrder());
+        list.sort(Collections.reverseOrder());
 
-        if (test[0] == 0) return 0;
-
-        for (int i = 0; i < test.length; i++) {
-            if (test[i] <= i) {
+        for (int i = 0; i < citations.length; i++) {
+            if (list.get(0) == 0) return 0;
+            else if (list.get(i) <= i) {
                 break;
             } else {
                 answer++;
