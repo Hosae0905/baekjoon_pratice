@@ -2,37 +2,49 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        ArrayList<Integer> list = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();
+        ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < progresses.length; i++) {
-            if ((100 - progresses[i]) % speeds[i] == 0) {
-                queue.add((100 - progresses[i]) / speeds[i]);
-            } else {
-                queue.add((100 - progresses[i]) / speeds[i] + 1);
-            }
-        }
-
-        int x = queue.poll();
-        int count = 1;
-        while (!queue.isEmpty()) {
-            if (x >= queue.peek()) {
+            int count = 0;
+            while (progresses[i] < 100) {
+                progresses[i] += speeds[i];
                 count++;
-                queue.poll();
-            } else {
-                list.add(count);
-                count = 1;
-                x = queue.poll();
             }
+            queue.add(count);
         }
 
-        list.add(count);
+        int complete = 0;
+        Integer value = queue.poll();
+        while (!queue.isEmpty()) {
+            if (value < queue.peek()) {
+                complete++;
+                list.add(complete);
+                complete = 0;
+                value = queue.poll();
+                if (queue.isEmpty()) {
+                    complete++;
+                    list.add(complete);
+                }
+            } else {
+                complete++;
+                queue.poll();
+                if (queue.isEmpty()) {
+                    complete++;
+                    list.add(complete);
+                }
 
-        int[] answer = new int[list.size()];
-        for (int i = 0; i < answer.length; i++) {
-            answer[i] = list.get(i);
+            }
+
         }
-        
-        return answer;
+
+        int[] result = new int[list.size()];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = list.get(i);
+        }
+
+
+        return result;
     }
 }
