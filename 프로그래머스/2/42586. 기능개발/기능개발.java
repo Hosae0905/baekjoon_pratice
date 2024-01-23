@@ -5,6 +5,7 @@ class Solution {
         Queue<Integer> queue = new LinkedList<>();
         ArrayList<Integer> list = new ArrayList<>();
 
+        int complete = 0;
         for (int i = 0; i < progresses.length; i++) {
             int count = 0;
             while (progresses[i] < 100) {
@@ -13,8 +14,6 @@ class Solution {
             }
             queue.add(count);
         }
-
-        int complete = 0;
         Integer value = queue.poll();
         while (!queue.isEmpty()) {
             if (value < queue.peek()) {
@@ -33,18 +32,15 @@ class Solution {
                     complete++;
                     list.add(complete);
                 }
-
             }
-
         }
 
-        int[] result = new int[list.size()];
+        int[] answer = new int[list.size()];
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = list.get(i);
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = list.get(i);
         }
 
-
-        return result;
+        return answer;
     }
 }
