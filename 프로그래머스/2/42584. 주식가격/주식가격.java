@@ -3,12 +3,12 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] prices) {
         Queue<Integer> queue = new LinkedList<>();
-        int[] answer = new int[prices.length];
 
         for (int i = 0; i < prices.length; i++) {
             queue.add(prices[i]);
         }
-        
+
+        int[] answer = new int[prices.length];
         int index = 0;
         while (!queue.isEmpty()) {
             int currentPrice = queue.poll();
