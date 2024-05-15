@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -27,6 +25,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(st.nextToken());
@@ -58,7 +57,11 @@ public class Main {
         dfs(R);
 
         for (int i = 1; i <= N; i++) {
-            System.out.println(answer[i]);
+            bw.write(String.valueOf(answer[i]));
+            bw.newLine();
         }
+
+        bw.close();
+        br.close();
     }
 }
