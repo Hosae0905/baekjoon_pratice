@@ -4,10 +4,9 @@ import java.util.StringTokenizer;
 public class Main {
     final static int MAX = 1000 + 10;
     static boolean[][] map;
-    static boolean[][] visited;
     static int[] dirY = {-1, 1, 0, 0};
     static int[] dirX = {0, 0, -1, 1};
-    static int T, N, M, K;
+    static int N, M;
     static boolean answer;
 
     public static void dfs(int y, int x) {
@@ -16,12 +15,12 @@ public class Main {
             return;
         }
 
-        visited[y][x] = true;
+        map[y][x] = false;
         for (int i = 0; i < 4; i++) {
             int newY = y + dirY[i];
             int newX = x + dirX[i];
 
-            if (map[newY][newX] && !visited[newY][newX]) {
+            if (map[newY][newX]) {
                 dfs(newY, newX);
             }
         }
@@ -36,7 +35,6 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
 
         map = new boolean[MAX][MAX];
-        visited = new boolean[MAX][MAX];
 
         for (int i = 1; i <= N; i++) {
             String str = br.readLine();
