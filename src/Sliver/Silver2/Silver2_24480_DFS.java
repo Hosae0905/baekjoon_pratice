@@ -2,7 +2,6 @@ package Sliver.Silver2;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
@@ -54,7 +53,7 @@ public class Silver2_24480_DFS {
         }
 
         for (int i = 1; i <= N; i++) {
-            Collections.sort(graph[i], Collections.reverseOrder());
+            Collections.sort(graph[i], Collections.reverseOrder());     // Collections.reversOrder를 통해서 내림차순으로 정렬할 수 있다.
         }
 
         dfs(R);
