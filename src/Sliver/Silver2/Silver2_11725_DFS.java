@@ -42,7 +42,6 @@ public class Silver2_11725_DFS {
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
-
             graph[x].add(y);        // x노드에 y값 추가
             graph[y].add(x);        // y노드에 x값 추가
         }
