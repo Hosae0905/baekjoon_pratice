@@ -12,7 +12,7 @@ public class Main {
 
         int[] W = new int[N + 1];
         int[] V = new int[N + 1];
-        int[][] dp = new int[N + 1][K + 1];
+        int[] dp = new int[K + 1];
 
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -21,15 +21,11 @@ public class Main {
         }
 
         for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= K; j++) {
-                if (W[i] > j) {
-                    dp[i][j] = dp[i - 1][j];
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - W[i]] + V[i]);
-                }
+            for (int j = K; j - W[i] >= 0; j--) {
+                dp[j] = Math.max(dp[j], dp[j - W[i]] + V[i]);
             }
         }
 
-        System.out.println(dp[N][K]);
+        System.out.println(dp[K]);
     }
 }
