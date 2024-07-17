@@ -15,51 +15,56 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
-        int total = 0;
-        int[] arr = new int[N];
+        int[] arr = new int[8001];
 
-        for (int i = 0; i < N; i++) {
-            int value = Integer.parseInt(br.readLine());
-            arr[i] = value;
-            total += value;
-        }
 
-        Arrays.sort(arr);
-
-        boolean flag = false;
-        int max = 0;
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        int mid = 10000;
         int mode = 10000;
 
         for (int i = 0; i < N; i++) {
-            int jump = 0;
-            int count = 1;
-            int value = arr[i];
+            int value = Integer.parseInt(br.readLine());
+            sum += value;
+            arr[value + 4000]++;
 
-            for (int j = i + 1; j < N; j++) {
-                if (value != arr[j]) {
-                    break;
-                }
-                count++;
-                jump++;
+            if (max < value) {
+                max = value;
             }
 
-            if (count > max) {
-                max = count;
-                mode = value;
-                flag = true;
-            } else if (count == max && flag == true) {
-                mode = value;
-                flag = false;
+            if (min > value) {
+                min = value;
             }
-
-            i += jump;
         }
 
+        int count = 0;
+        int mode_max = 0;
 
-        sb.append((int)Math.round((double) total / N)).append("\n");     // 산술 평균
-        sb.append(arr[N / 2]).append("\n");      // 중앙 값
+        boolean flag = false;
+
+        for (int i = min + 4000; i <= max + 4000; i++) {
+            if (arr[i] > 0) {
+                if (count < (N + 1) / 2) {
+                    count += arr[i];
+                    mid = i - 4000;
+                }
+
+                if (mode_max < arr[i]) {
+                    mode_max = arr[i];
+                    mode = i - 4000;
+                    flag = true;
+                } else if (mode_max == arr[i] && flag == true) {
+                    mode = i - 4000;
+                    flag = false;
+                }
+            }
+        }
+
+        sb.append((int)Math.round((double) sum / N)).append("\n");     // 산술 평균
+        sb.append(mid).append("\n");      // 중앙 값
         sb.append(mode).append("\n");
-        sb.append(arr[N - 1] - arr[0]);       // 범위
+        sb.append(max - min);       // 범위
         System.out.println(sb);
     }
 }
