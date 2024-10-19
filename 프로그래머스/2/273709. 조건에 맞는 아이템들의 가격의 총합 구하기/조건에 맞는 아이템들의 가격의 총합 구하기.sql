@@ -1,0 +1,9 @@
+-- 코드를 작성해주세요
+/*
+ITEM_INFO 테이블에서 희귀도가 LEGEND인 아이템의 가격의 총합을 구한다.
+컬럼명은 TOTAL_PRICE로 지정한다.
+*/
+SELECT SUM(PRICE) AS TOTAL_PRICE
+FROM ITEM_INFO
+GROUP BY RARITY
+HAVING RARITY = 'LEGEND'
