@@ -26,8 +26,10 @@ public class Main {
                 String str1 = sb1.reverse().toString();     // 자른 문자를 뒤집어서 변수에 저장한다.
                 String str2 = sb2.reverse().toString();
                 String str3 = sb3.reverse().toString();
-
-                list.add(str1 + str2 + str3);       // 다시 세 단어를 나누기 전과 같은 순서로 합쳐 하나로 만든다.
+                
+                StringBuilder result = new StringBuilder();
+                result.append(str1).append(str2).append(str3);
+                list.add(result.toString());       // 다시 세 단어를 나누기 전과 같은 순서로 합쳐 하나로 만든다.
             }
         }
 
