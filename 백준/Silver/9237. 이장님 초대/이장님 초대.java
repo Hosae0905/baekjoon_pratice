@@ -32,15 +32,16 @@ public class Main {
         // 걸리는 날짜를 기준으로 내림차순 정렬
         Arrays.sort(arr, Comparator.reverseOrder());
 
-        // 묘목을 구입한 날이 1일이기 때문에 i에 1을 더한 뒤 묘목이 자라는 날짜를 더해서 배열에 저장한다.
+        // 최대로 걸리는 시간
+        int max = 0;
+
+        // 묘목을 심을 때 하루가 걸리기 때문에 i에 1을 더한 뒤 묘목이 자라는 날짜를 더해서 최댓값과 비교하여 저장한다.
         for(int i = 0; i < arr.length; i++) {
-            arr[i] = (i + 1) + (arr[i]);
+            max = Math.max(max, arr[i] + i + 1);
         }
 
-        // 다시 걸리는 날짜를 기준으로 내림차순 정렬을 한다.
-        Arrays.sort(arr, Comparator.reverseOrder());
 
         // 나무가 완전히 자란 다음날 이장님을 초대할 것이기 때문에 1을 더해주고 출력한다.
-        System.out.println(arr[0] + 1);
+        System.out.println(max + 1);
     }
 }
