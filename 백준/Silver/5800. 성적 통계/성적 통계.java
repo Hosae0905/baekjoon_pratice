@@ -18,13 +18,13 @@ public class Main {
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();         // 결과를 저장할 변수
 
-        LinkedList<Integer>[] lists = new LinkedList[k];        // 수학 성적을 저장할 연결 리스트 배열
-
         // 각 반마다 학생들의 수학 성적을 연결 리스트로 만들고 내림차순 정렬하여 배열에 저장한다.
         for(int i = 0; i < k; i++) {
             st = new StringTokenizer(br.readLine());
             int n = Integer.parseInt(st.nextToken());       // 각 반마다 학생 수
             LinkedList<Integer> list = new LinkedList<>();  // 각 반의 수학 성적을 저장할 연결 리스트
+
+            sb.append("Class ").append(i + 1).append("\n");     // 몇 반의 성적을 출력할지 저장한다.
 
             // 연결 리스트에 수학 성적을 저장한다.
             for(int j = 0; j < n; j++) {
@@ -39,25 +39,24 @@ public class Main {
                 }
             });
 
-            lists[i] = list;        // 내림차순 정렬한 연결 리스트를 배열에 저장한다.
-        }
-
-        // 각 반마다 가장 높은 점수와 가장 낮은 점수 그리고 가장 큰 인접한 점수 차이를 sb에 저장한다.
-        for(int i = 0; i < k; i++) {
-            sb.append("Class ").append(i + 1).append("\n");     // 몇 반의 성적을 출력할지 저장한다.
-            int max = lists[i].getFirst();      // 가장 높은 점수
-            int min = lists[i].getLast();       // 가장 낮은 점수
-            int gap = 0;        // 인접한 점수 차이를 저장할 변수
-            int temp = 0;       // 앞선 학생의 수학 점수를 저장할 임시 변수
+            int max = list.getFirst();      // 가장 높은 점수
+            int min = list.getLast();       // 가장 낮은 점수
+            int gap = 0;                    // 인접한 점수 차이를 저장할 변수
 
             // 각 반의 총 학생 수 만큼 인접한 성적 차이를 저장한다.
-            for(int j = 0; j < lists[i].size(); j++) {
-                // 만약 현재 인접한 점수차와 앞선 학생의 수학 점수와 현재 학생의 수학 점수 차이를 비교하여 더 크다면 gap을 변경해준다.
-                if(gap < temp - lists[i].get(j)) {
-                    gap = temp - lists[i].get(j);
+            for(int j = 0; j < list.size() - 1; j++) {
+
+                /*
+                * 만약 학생의 성적이 gap 보다 작다면 현재 gap이 가장 높은 인접한 점수인 것을 알 수 있다.
+                * 예를 들어 첫 번째 예저를 보면 76과 30의 차이는 46이다.
+                * 만약 다음에 숫자가 0이 오더라도 그 차이는 46이 되기 때문에 결국 점수가 gap보다 작다면 해당 gap 최댓값인 것을 알 수 있다.
+                * */
+                if (list.get(j) < gap) {
+                    break;
                 }
 
-                temp = lists[i].get(j);     // 앞선 학생의 점수를 변경해준다.
+                // 만약 현재 인접한 점수차와 앞선 학생의 수학 점수와 현재 학생의 수학 점수 차이를 비교하여 더 크다면 gap을 변경해준다.
+                gap = Math.max(gap, list.get(j) - list.get(j + 1));
             }
 
             // 최종적으로 가장 높은 점수와 가장 낮은 점수 그리고 가장 큰 인접한 점수 차이를 sb에 저장한다.
