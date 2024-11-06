@@ -25,12 +25,14 @@ class Country {
     int gold;
     int silver;
     int bronze;
+    int grade;
 
-    Country(int num, int gold, int silver, int bronze) {
+    Country(int num, int gold, int silver, int bronze, int grade) {
         this.num = num;
         this.gold = gold;
         this.silver = silver;
         this.bronze = bronze;
+        this.grade = grade;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class Main {
             int gold = Integer.parseInt(st.nextToken());        // 금메달 개수
             int silver = Integer.parseInt(st.nextToken());      // 은메달 개수
             int bronze = Integer.parseInt(st.nextToken());      // 동메달 개수
-            list.add(new Country(num, gold, silver, bronze));   // Country 객체를 리스트에 저장
+            list.add(new Country(num, gold, silver, bronze, 0));   // Country 객체를 리스트에 저장
         }
 
         // 국가별 메달 개수를 통해 내림차순 정렬을 한다.
@@ -84,44 +86,41 @@ public class Main {
                 * 그렇지 않으면 금메달 개수를 기준으로 내림차순 정렬을 한다.
                 * */
                 if(o2.gold == o1.gold) {
-                    return o2.silver - o1.silver;
-                } else if(o2.gold == o1.gold && o2.silver == o1.silver) {
-                    return o2.bronze - o1.bronze;
+                    if (o2.silver == o1.silver) {
+                        return o2.bronze - o1.bronze;
+                    } else {
+                        return o2.silver - o1.silver;
+                    }
                 } else {
                     return o2.gold - o1.gold;
                 }
             }
         });
 
-        int grade = 1;                      // 첫 번째 등수는 1등이다.
-        Country country = list.get(0);      // 가장 앞에 있는 나라를 변수에 저장한다.
+        list.get(0).grade = 1;
+        int find = 0;
+
 
         /*
         * 만약 가장 앞에 있는 나라가 찾고자 하는 나라라면 1등이기 때문에 바로 출력을 해준다.
         * 그렇지 않다면 찾고자 하는 국가를 리스트에서 찾는다.
         * */
-        if (country.num == k) {
-            System.out.println(grade);
-        } else {
-            // 리스트에서 국가를 하나씩 가져와 찾고자 하는 국가가 맞는지 확인한다.
-            for(int i = 1; i < list.size(); i++) {
-                // 만약 찾고자 하는 국가가 맞다면 현재 등수를 출력해주고 종료한다.
-                if (list.get(i).num == k) {
-                    System.out.println(grade);
-                    break;
-                }
+        for (int i = 1; i < list.size(); i++) {
+            Country now = list.get(i);
+            Country prev = list.get(i - 1);
 
-                /*
-                * 만약 현재 country에 저장된 국가와 리스트에서 가져올 국가가 동일하다면, 즉 같은 메달 개수를 가지고 있다면 반복문을 계속 진행한다.
-                * 그렇지 않다면 등수를 올려주고 country에 리스트에서 가져올 국가 정보를 담아준다.
-                * */
-                if (country.equals(list.get(i))) {
-                    continue;
-                } else {
-                    grade++;
-                    country = list.get(i);
-                }
+            if (list.get(i).num == k) {
+                find = i;
+            }
+
+            if (now.equals(prev)) {
+                now.grade = prev.grade;
+                continue;
+            } else {
+                now.grade = i + 1;
             }
         }
+
+        System.out.println(list.get(find).grade);
     }
 }
